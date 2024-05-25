@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/etProgramTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Program Title" />
+
+    <Spinner
+        android:id="@+id/spCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btnAddExercise"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Exercise" />
+
+    <ListView
+        android:id="@+id/listViewSelectedExercises"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <Button
+        android:id="@+id/btnCreateProgram"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Create Program" />
+</LinearLayout>

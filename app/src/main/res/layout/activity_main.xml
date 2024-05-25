@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <Button
+        android:id="@+id/btnAddExercise"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Exercises"
+        android:onClick="goToAddExercise" />
+
+    <Button
+        android:id="@+id/btnCreateProgram"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Create Program"
+        android:onClick="goToCreateProgram" />
+
+    <Button
+        android:id="@+id/btnProgress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="View Progress"
+        android:onClick="goToProgress" />
+</LinearLayout>

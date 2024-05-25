@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">GymApp</string>
+    <string-array name="exercise_categories">
+        <item>Push</item>
+        <item>Pull</item>
+        <item>Legs</item>
+        <item>Abs</item>
+        <item>Cardio</item>
+    </string-array>
+</resources>
