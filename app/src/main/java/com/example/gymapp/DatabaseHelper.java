@@ -68,6 +68,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.insert(TABLE_EXERCISES, null, values);
         db.close();
     }
+    //Provjerva da li vec postoji ta vjezba
+    public boolean exerciseExists(String name, String category) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_EXERCISES + " WHERE " + COLUMN_NAME + "=? AND " + COLUMN_CATEGORY + "=?", new String[]{name, category});
+        boolean exists = cursor.getCount() > 0;
+        cursor.close();
+        db.close();
+        return exists;
+    }
+
 
     // Ostale metode za rad sa bazom
     public List<Exercise> getAllExercises() {
