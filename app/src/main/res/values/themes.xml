@@ -6,4 +6,11 @@
     </style>
 
     <style name="Theme.GymApp" parent="Base.Theme.GymApp" />
+
+    <!-- Dodavanje stila za kalendarski tekst -->
+    <style name="CalendarTextAppearance" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/calendar_text_color</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">16sp</item>
+    </style>
 </resources>

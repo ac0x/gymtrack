@@ -5,24 +5,66 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <Button
-        android:id="@+id/btnAddExercise"
+    <!-- LinearLayout za kalendar sa pozadinom -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Add Exercises"
-        android:onClick="goToAddExercise" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:background="@color/calendar_background_color">
 
-    <Button
-        android:id="@+id/btnCreateProgram"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Create Program"
-        android:onClick="goToCreateProgram" />
+        <CalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weekDayTextAppearance="@style/CalendarTextAppearance"
+            android:dateTextAppearance="@style/CalendarTextAppearance" />
+    </LinearLayout>
 
-    <Button
-        android:id="@+id/btnProgress"
+    <!-- LinearLayout za planove treninga -->
+    <LinearLayout
+        android:id="@+id/llPlans"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="#f0f0f0">
+        <!-- Dodajte elemente za prikazivanje planova ovde -->
+    </LinearLayout>
+
+    <!-- LinearLayout za dugmad na dnu ekrana -->
+    <LinearLayout
+        android:id="@+id/llButtons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="View Progress"
-        android:onClick="goToProgress" />
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnAddExercise"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Add Exercise" />
+
+            <Button
+                android:id="@+id/btnCreateProgram"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Create Program" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnViewProgress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="View Progress"
+            android:layout_marginTop="8dp"/>
+    </LinearLayout>
 </LinearLayout>

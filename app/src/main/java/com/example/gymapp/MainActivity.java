@@ -2,28 +2,40 @@ package com.example.gymapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.widget.Button;
+import android.widget.CalendarView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
+
+    private CalendarView calendarView;
+    private Button btnAddExercise;
+    private Button btnCreateProgram;
+    private Button btnViewProgress;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    }
 
-    public void goToAddExercise(View view) {
-        Intent intent = new Intent(this, AddExerciseActivity.class);
-        startActivity(intent);
-    }
+        calendarView = findViewById(R.id.calendarView);
+        btnAddExercise = findViewById(R.id.btnAddExercise);
+        btnCreateProgram = findViewById(R.id.btnCreateProgram);
+        btnViewProgress = findViewById(R.id.btnViewProgress);
 
-    public void goToCreateProgram(View view) {
-        Intent intent = new Intent(this, CreateProgramActivity.class);
-        startActivity(intent);
-    }
+        btnAddExercise.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, AddExerciseActivity.class);
+            startActivity(intent);
+        });
 
-    public void goToProgress(View view) {
-        Intent intent = new Intent(this, ProgressActivity.class);
-        startActivity(intent);
+        btnCreateProgram.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, CreateProgramActivity.class);
+            startActivity(intent);
+        });
+
+        btnViewProgress.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, ProgressActivity.class);
+            startActivity(intent);
+        });
     }
 }
