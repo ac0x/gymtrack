@@ -27,11 +27,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_REPS = "reps";
     private static final String COLUMN_WEIGHT = "weight";
 
-    // Tabele za programe
+    // Tabela za programe
     private static final String TABLE_PROGRAMS = "programs";
     private static final String COLUMN_PROGRAM_ID = "program_id";
     private static final String COLUMN_TITLE = "title";
 
+    // Tabela za vežbe unutar programa
     private static final String TABLE_PROGRAM_EXERCISES = "program_exercises";
 
     public DatabaseHelper(Context context) {
@@ -67,6 +68,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + "FOREIGN KEY(program_id) REFERENCES programs(id),"
                 + "FOREIGN KEY(exercise_id) REFERENCES exercises(id)" + ")";
         db.execSQL(CREATE_PROGRAM_EXERCISES_TABLE);
+
+        // Dodavanje početnih podataka
+        addInitialData(db);
     }
 
     @Override
@@ -76,6 +80,90 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_PROGRAMS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_PROGRAM_EXERCISES);
         onCreate(db);
+    }
+
+    private void addInitialData(SQLiteDatabase db) {
+        // Dodavanje početnih vežbi
+        addExercise(db, "Bench Press", "Push");
+        addExercise(db, "Shoulder Press", "Push");
+        addExercise(db, "Tricep Dips", "Push");
+
+        addExercise(db, "Pull Ups", "Pull");
+        addExercise(db, "Bent Over Row", "Pull");
+        addExercise(db, "Bicep Curls", "Pull");
+
+        addExercise(db, "Squats", "Legs");
+        addExercise(db, "Lunges", "Legs");
+        addExercise(db, "Leg Press", "Legs");
+
+        addExercise(db, "Crunches", "Abs");
+        addExercise(db, "Plank", "Abs");
+        addExercise(db, "Leg Raises", "Abs");
+
+        addExercise(db, "Running", "Cardio");
+        addExercise(db, "Cycling", "Cardio");
+        addExercise(db, "Jump Rope", "Cardio");
+
+        // Dodavanje početnih programa
+        long pushProgramId = addProgram(db, "Push Program");
+        addProgramExercise(db, pushProgramId, "Bench Press");
+        addProgramExercise(db, pushProgramId, "Shoulder Press");
+        addProgramExercise(db, pushProgramId, "Tricep Dips");
+
+        long pullProgramId = addProgram(db, "Pull Program");
+        addProgramExercise(db, pullProgramId, "Pull Ups");
+        addProgramExercise(db, pullProgramId, "Bent Over Row");
+        addProgramExercise(db, pullProgramId, "Bicep Curls");
+
+        long legsProgramId = addProgram(db, "Legs Program");
+        addProgramExercise(db, legsProgramId, "Squats");
+        addProgramExercise(db, legsProgramId, "Lunges");
+        addProgramExercise(db, legsProgramId, "Leg Press");
+
+        long absProgramId = addProgram(db, "Abs Program");
+        addProgramExercise(db, absProgramId, "Crunches");
+        addProgramExercise(db, absProgramId, "Plank");
+        addProgramExercise(db, absProgramId, "Leg Raises");
+
+        long cardioProgramId = addProgram(db, "Cardio Program");
+        addProgramExercise(db, cardioProgramId, "Running");
+        addProgramExercise(db, cardioProgramId, "Cycling");
+        addProgramExercise(db, cardioProgramId, "Jump Rope");
+    }
+
+    private void addExercise(SQLiteDatabase db, String name, String category) {
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_NAME, name);
+        values.put(COLUMN_CATEGORY, category);
+        db.insert(TABLE_EXERCISES, null, values);
+    }
+
+    private long addProgram(SQLiteDatabase db, String title) {
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_TITLE, title);
+        return db.insert(TABLE_PROGRAMS, null, values);
+    }
+
+    private void addProgramExercise(SQLiteDatabase db, long programId, String exerciseName) {
+        long exerciseId = getExerciseIdByName(db, exerciseName);
+        if (exerciseId != -1) {
+            ContentValues values = new ContentValues();
+            values.put("program_id", programId);
+            values.put("exercise_id", exerciseId);
+            db.insert(TABLE_PROGRAM_EXERCISES, null, values);
+        }
+    }
+
+    private long getExerciseIdByName(SQLiteDatabase db, String name) {
+        Cursor cursor = db.rawQuery("SELECT " + COLUMN_ID + " FROM " + TABLE_EXERCISES + " WHERE " + COLUMN_NAME + "=?", new String[]{name});
+        if (cursor.moveToFirst()) {
+            long id = cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_ID));
+            cursor.close();
+            return id;
+        } else {
+            cursor.close();
+            return -1;
+        }
     }
 
     public void addExercise(String name, String category) {
@@ -235,5 +323,62 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return null;
         }
     }
+
+    public List<String> getAllCategories() {
+        List<String> categories = new ArrayList<>();
+        categories.add("Push");
+        categories.add("Pull");
+        categories.add("Legs");
+        categories.add("Abs");
+        categories.add("Cardio");
+        return categories;
+    }
+
+    public List<DailyExercise> getDailyExercisesByExerciseId(int exerciseId) {
+        List<DailyExercise> dailyExercises = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_DAILY_EXERCISES + " WHERE " + COLUMN_EXERCISE_ID + "=?", new String[]{String.valueOf(exerciseId)});
+        if (cursor.moveToFirst()) {
+            do {
+                DailyExercise dailyExercise = new DailyExercise(
+                        cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DATE)),
+                        cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_EXERCISE_ID)),
+                        cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_SETS)),
+                        cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_REPS)),
+                        cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_WEIGHT)),
+                        this // Pass DatabaseHelper instance
+                );
+                dailyExercises.add(dailyExercise);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return dailyExercises;
+    }
+
+    public List<DailyExercise> getAllDailyExercises() {
+        List<DailyExercise> dailyExercises = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_DAILY_EXERCISES, null);
+        if (cursor.moveToFirst()) {
+            do {
+                DailyExercise dailyExercise = new DailyExercise(
+                        cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DATE)),
+                        cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_EXERCISE_ID)),
+                        cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_SETS)),
+                        cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_REPS)),
+                        cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_WEIGHT)),
+                        this // Pass DatabaseHelper instance
+                );
+                dailyExercises.add(dailyExercise);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return dailyExercises;
+    }
+
 
 }

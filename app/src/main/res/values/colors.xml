@@ -1,8 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="calendar_background_color">#E0F7FA</color>
-    <color name="calendar_text_color">#000000</color>
-
+    <color name="teal_700">#00796B</color>
+    <color name="teal_200">#80CBC4</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="calendar_text_color">#FF000000</color>
+    <color name="light_gray">#f0f0f0</color>
+    <color name="button_disabled">#BDBDBD</color>
+    <color name="button_pressed">#004D40</color>
 </resources>

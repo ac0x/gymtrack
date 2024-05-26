@@ -1,0 +1,11 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_enabled="false">
+        <color android:color="@color/button_disabled" />
+    </item>
+    <item android:state_pressed="true">
+        <color android:color="@color/button_pressed" />
+    </item>
+    <item>
+        <color android:color="@color/teal_700" />
+    </item>
+</selector>

@@ -1,44 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@color/light_gray"
+    tools:context=".AddDailyExerciseActivity">
 
     <Spinner
         android:id="@+id/spExercises"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp" />
 
-    <EditText
-        android:id="@+id/etSets"
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Sets"
-        android:inputType="number"
-        android:gravity="center" />
+        android:layout_marginBottom="16dp">
 
-    <EditText
-        android:id="@+id/etReps"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etSets"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Sets"
+            android:inputType="number"
+            android:gravity="center" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Reps"
-        android:inputType="number"
-        android:gravity="center" />
+        android:layout_marginBottom="16dp">
 
-    <EditText
-        android:id="@+id/etWeight"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etReps"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Reps"
+            android:inputType="number"
+            android:gravity="center" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Weight"
-        android:inputType="numberDecimal"
-        android:gravity="center" />
+        android:layout_marginBottom="16dp">
 
-    <Button
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etWeight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Weight"
+            android:inputType="numberDecimal"
+            android:gravity="center" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnAddExercise"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add Exercise" />
+        android:text="Add Exercise"
+        android:layout_marginBottom="16dp"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewDailyExercises"

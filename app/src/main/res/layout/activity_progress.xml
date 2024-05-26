@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@color/light_gray"
+    tools:context=".ProgressActivity">
 
-    <TextView
+    <ListView
+        android:id="@+id/listViewProgressCategories"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="1dp"
+        android:background="@color/white"
+        android:padding="8dp" />
+
+    <Button
+        android:id="@+id/btnAddNewProgram"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Progress over time" />
-
-    <!-- Graph view will go here to show progress -->
+        android:text="Add New Program"
+        style="@style/Widget.GymApp.Button"/>
 </LinearLayout>

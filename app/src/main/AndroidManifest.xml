@@ -1,6 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.gymapp">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <application
         android:allowBackup="true"
@@ -28,6 +27,9 @@
         <activity android:name=".NewProgramActivity" android:exported="true" />
         <activity android:name=".AddDailyExerciseActivity" android:exported="true" />
         <activity android:name=".AddProgramDailyExerciseActivity" android:exported="true" />
+        <activity android:name=".ExerciseListActivity" android:exported="true" />
+        <activity android:name=".ExerciseProgressActivity" android:exported="true" />
+
 
     </application>
 </manifest>

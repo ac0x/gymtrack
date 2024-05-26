@@ -1,17 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:androidx="http://schemas.android.com/apk/res/androidx"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@color/light_gray"
+    tools:context=".MainActivity">
 
-    <CalendarView
-        android:id="@+id/calendarView"
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:dateTextAppearance="?android:attr/textAppearanceLarge"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginBottom="16dp"
+        app:cardElevation="4dp"
+        app:cardCornerRadius="8dp"
+        app:cardBackgroundColor="@color/white">
+
+        <CalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:dateTextAppearance="@style/CalendarTextAppearance"
+            android:layout_margin="16dp"/>
+    </com.google.android.material.card.MaterialCardView>
 
     <TextView
         android:id="@+id/tvNoExercises"
@@ -21,6 +33,7 @@
         android:gravity="center"
         android:visibility="gone"
         android:textSize="16sp"
+        android:textColor="@color/black"
         android:layout_marginTop="16dp"/>
 
     <androidx.core.widget.NestedScrollView
@@ -42,21 +55,23 @@
         android:gravity="center"
         android:layout_marginTop="16dp">
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnAddDailyExercise"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Add Daily Exercise"
             android:layout_weight="1"
-            android:layout_marginEnd="8dp"/>
+            android:layout_marginEnd="8dp"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnAddProgramExercise"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Add Program Exercise"
             android:layout_weight="1"
-            android:layout_marginStart="8dp"/>
+            android:layout_marginStart="8dp"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
     </LinearLayout>
 
     <LinearLayout
@@ -66,27 +81,30 @@
         android:gravity="center"
         android:layout_marginTop="16dp">
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnAddExercise"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Add Exercise"
             android:layout_weight="1"
-            android:layout_marginEnd="8dp"/>
+            android:layout_marginEnd="8dp"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnCreateProgram"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Create Program"
             android:layout_weight="1"
-            android:layout_marginStart="8dp"/>
+            android:layout_marginStart="8dp"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
     </LinearLayout>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnViewProgress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="View Progress"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="16dp"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
 </LinearLayout>
