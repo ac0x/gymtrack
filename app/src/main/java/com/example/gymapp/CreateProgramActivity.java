@@ -3,7 +3,6 @@ package com.example.gymapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -53,5 +52,5 @@ public class CreateProgramActivity extends AppCompatActivity {
     public List<Exercise> getExercisesByProgramTitle(String programTitle) {
         return db.getExercisesByProgramTitle(programTitle);
     }
-}
 
+}

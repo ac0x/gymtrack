@@ -1,70 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:androidx="http://schemas.android.com/apk/res/androidx"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp">
 
-    <!-- LinearLayout za kalendar sa pozadinom -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:background="@color/calendar_background_color">
-
-        <CalendarView
-            android:id="@+id/calendarView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:weekDayTextAppearance="@style/CalendarTextAppearance"
-            android:dateTextAppearance="@style/CalendarTextAppearance" />
-    </LinearLayout>
-
-    <!-- LinearLayout za planove treninga -->
-    <LinearLayout
-        android:id="@+id/llPlans"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:padding="16dp"
-        android:background="#f0f0f0">
-        <!-- Dodajte elemente za prikazivanje planova ovde -->
-    </LinearLayout>
-
-    <!-- LinearLayout za dugmad na dnu ekrana -->
-    <LinearLayout
-        android:id="@+id/llButtons"
+    <CalendarView
+        android:id="@+id/calendarView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:dateTextAppearance="?android:attr/textAppearanceLarge"
+        android:layout_marginBottom="16dp"/>
 
-        <LinearLayout
+    <TextView
+        android:id="@+id/tvNoExercises"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="No exercises for this day"
+        android:gravity="center"
+        android:visibility="gone"
+        android:textSize="16sp"
+        android:layout_marginTop="16dp"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewDailyExercises"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"/>
+    </androidx.core.widget.NestedScrollView>
 
-            <Button
-                android:id="@+id/btnAddExercise"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Add Exercise" />
-
-            <Button
-                android:id="@+id/btnCreateProgram"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Create Program" />
-        </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="16dp">
 
         <Button
-            android:id="@+id/btnViewProgress"
-            android:layout_width="match_parent"
+            android:id="@+id/btnAddDailyExercise"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="View Progress"
-            android:layout_marginTop="8dp"/>
+            android:text="Add Daily Exercise"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"/>
+
+        <Button
+            android:id="@+id/btnAddProgramExercise"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Program Exercise"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"/>
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="16dp">
+
+        <Button
+            android:id="@+id/btnAddExercise"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Exercise"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"/>
+
+        <Button
+            android:id="@+id/btnCreateProgram"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create Program"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnViewProgress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="View Progress"
+        android:layout_marginTop="16dp"/>
 </LinearLayout>
